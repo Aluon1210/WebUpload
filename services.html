@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dịch vụ tài chính</title>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
+  <style>
+    :root {
+      --main-color: #215c5c;
+      --main-color-light: #2e7d7d;
+      --main-color-dark: #174040;
+      
+      --main-btn-gradient: linear-gradient(90deg, #215c5c 0%, #2e7d7d 100%);
+      --main-btn-gradient-hover: linear-gradient(90deg, #174040 0%, #215c5c 100%);
+      --main-icon-gradient: linear-gradient(135deg, #215c5c 0%, #2e7d7d 100%);
+      --main-shadow: 0 4px 24px rgba(33, 92, 92, 0.08);
+      --main-shadow-hover: 0 6px 24px rgba(33, 92, 92, 0.13);
+    }
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      min-height: 562px;
+      margin: 0;
+      color: #222;
+    }
+    .why-choose-us {
+      background: var(--main-bg-gradient);
+      padding: 60px 0;
+    }
+    .why-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 40px;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+    }
+    .why-left {
+      flex: 1 1 350px;
+      min-width: 320px;
+      background: #fff;
+      border-radius: 18px;
+      box-shadow: var(--main-shadow);
+      padding: 40px 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+    .why-left h2 {
+      font-size: 2.2rem;
+      color: var(--main-color);
+      margin-bottom: 12px;
+    }
+    .why-left p {
+      font-size: 1.08rem;
+      color: #444;
+      margin-bottom: 18px;
+    }
+    .video-button {
+      background: var(--main-btn-gradient);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 12px 28px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 2px 8px rgba(33, 92, 92, 0.12);
+      transition: background 0.2s;
+    }
+    .video-button:hover {
+      background: var(--main-btn-gradient-hover);
+    }
+    .why-right {
+      flex: 1 1 400px;
+      min-width: 340px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+    }
+    .why-feature {
+      background: #fff;
+      border-radius: 14px;
+      box-shadow: 0 2px 12px rgba(33, 92, 92, 0.07);
+      padding: 24px 18px;
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+    .why-feature:hover {
+      transform: translateY(-4px) scale(1.03);
+      box-shadow: var(--main-shadow-hover);
+    }
+    .why-icon {
+      background: var(--main-icon-gradient);
+      color: #fff;
+      border-radius: 50%;
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      flex-shrink: 0;
+      box-shadow: 0 2px 8px rgba(33, 92, 92, 0.12);
+    }
+    .why-feature h4 {
+      margin: 0 0 6px 0;
+      font-size: 1.13rem;
+      color: var(--main-color-dark);
+    }
+    .why-feature p {
+      margin: 0;
+      color: #555;
+      font-size: 0.98rem;
+    }
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(33, 92, 92, 0.75);
+      justify-content: center;
+      align-items: center;
+    }
+    .modal-content {
+      background: #fff;
+      border-radius: 14px;
+      overflow: hidden;
+      width: 92vw;
+      max-width: 700px;
+      height: 400px;
+      position: relative;
+      box-shadow: 0 0 32px rgba(33, 92, 92, 0.18);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .video-wrapper {
+      width: 100%;
+      height: 100%;
+    }
+    .close-button {
+      position: absolute;
+      top: 10px;
+      right: 18px;
+      font-size: 30px;
+      font-weight: bold;
+      color: var(--main-color-dark);
+      cursor: pointer;
+      z-index: 10;
+      transition: color 0.2s;
+    }
+    .close-button:hover {
+      color: #ef4444;
+    }
+    @media (max-width: 900px) {
+      .why-container {
+        flex-direction: column;
+        gap: 32px;
+      }
+      .why-right {
+        grid-template-columns: 1fr;
+        gap: 18px;
+      }
+    }
+    @media (max-width: 600px) {
+      .why-left, .modal-content {
+        padding: 20px 8px;
+      }
+      .modal-content {
+        height: 220px;
+      }
+    }
+
+
+    /* =============================
+   Responsive Styles
+   ============================= */
+
+/* Tablet (tối đa 1024px) */
+/* Tablet (max-width: 1024px) */
+@media (max-width: 1024px) {
+  .why-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    min-height:1200px ;
+  }
+  .why-left,
+  .why-right {
+    width: 100%;
+    max-width: 700px;
+  }
+  .why-right {
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+}
+
+/* Mobile (max-width: 768px) */
+@media (max-width: 768px) {
+  .why-left {
+    padding: 24px 12px;
+  }
+  .why-left h2 {
+    font-size: 1.5rem;
+  }
+  .why-left p {
+    font-size: 0.97rem;
+  }
+  .video-button {
+    padding: 9px 16px;
+    font-size: 0.98rem;
+  }
+  .why-right {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .why-feature {
+    padding: 16px;
+  }
+  .why-feature h4 {
+    font-size: 1rem;
+  }
+  .why-feature p {
+    font-size: 0.93rem;
+  }
+  .why-icon {
+    width: 36px;
+    height: 36px;
+    font-size: 1.1rem;
+  }
+}
+
+/* Small devices (max-width: 480px) */
+@media (max-width: 480px) {
+  .why-left h2 {
+    font-size: 1.2rem;
+  }
+  .why-feature {
+    padding: 10px;
+    gap: 8px;
+  }
+  .why-icon {
+    width: 28px;
+    height: 28px;
+    font-size: 1rem;
+  }
+  .video-button {
+    width: 100%;
+    justify-content: center;
+    font-size: 0.95rem;
+  }
+  .modal-content {
+    height: 120px;
+    padding: 0;
+  }
+}
+
+  </style>
+</head>
+<body>
+
+<section class="why-choose-us">
+  <div class="why-container">
+    <div class="why-left fade-up">
+      <h2>Tại sao chọn chúng tôi?</h2>
+      <p>
+        Khám phá các dịch vụ tài chính hiện đại, an toàn và thân thiện với người dùng. Chúng tôi giúp bạn kiểm soát tài chính dễ dàng, bảo mật và hiệu quả.
+      </p>
+      <button class="video-button">
+        <i class="fa fa-play"></i> Xem Video
+      </button>
+    </div>
+    <div class="why-right fade-up">
+      <div class="why-feature">
+        <div class="why-icon"><i class="fa fa-mobile-alt"></i></div>
+        <div>
+          <h4>Giao diện hiện đại</h4>
+          <p>Thiết kế tối ưu cho mọi thiết bị, dễ sử dụng và trực quan.</p>
+        </div>
+      </div>
+      <div class="why-feature">
+        <div class="why-icon"><i class="fa fa-chart-pie"></i></div>
+        <div>
+          <h4>Phân tích thông minh</h4>
+          <p>Thống kê, báo cáo và gợi ý tài chính cá nhân hóa.</p>
+        </div>
+      </div>
+      <div class="why-feature">
+        <div class="why-icon"><i class="fa fa-headset"></i></div>
+        <div>
+          <h4>Hỗ trợ 24/7</h4>
+          <p>Đội ngũ tư vấn luôn sẵn sàng hỗ trợ bạn mọi lúc, mọi nơi.</p>
+        </div>
+      </div>
+      <div class="why-feature">
+        <div class="why-icon"><i class="fa fa-shield-alt"></i></div>
+        <div>
+          <h4>Bảo mật tuyệt đối</h4>
+          <p>Mã hóa dữ liệu, phát hiện gian lận và bảo vệ quyền riêng tư.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Info Modal -->
+<div id="videoModal" class="modal">
+  <div class="modal-content">
+    <span class="close-button">&times;</span>
+    <iframe id="videoIframe" width="100%" height="100%" src="https://www.youtube.com/embed/AFDb4NkIjFI?si=8KYfoB8T2fk3jNNy" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  </div>
+</div>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const elements = document.querySelectorAll('.fade-up');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('show');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    elements.forEach(el => observer.observe(el));
+
+    // Modal info
+    const videoBtn = document.querySelector('.video-button');
+    const modal = document.getElementById('videoModal');
+    const closeBtn = document.querySelector('.close-button');
+    const videoIframe = document.getElementById('videoIframe');
+    const videoSrc = videoIframe.src;
+
+    videoBtn.addEventListener('click', () => {
+      modal.style.display = 'flex';
+      videoIframe.src = videoSrc; // Reset src to ensure video loads
+    });
+
+    function closeModal() {
+      modal.style.display = 'none';
+      videoIframe.src = ''; // Stop the video
+    }
+
+    closeBtn.addEventListener('click', closeModal);
+
+    window.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        closeModal();
+      }
+    });
+  });
+</script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const elements = document.querySelectorAll('.fade-up');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('show');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    elements.forEach(el => observer.observe(el));
+
+    // Modal info
+    const videoBtn = document.querySelector('.video-button');
+    const modal = document.getElementById('videoModal');
+    const closeBtn = document.querySelector('.close-button');
+
+    videoBtn.addEventListener('click', () => {
+      modal.style.display = 'flex';
+    });
+
+    closeBtn.addEventListener('click', () => {
+      modal.style.display = 'none';
+    });
+
+    window.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.style.display = 'none';
+      }
+    });
+  });
+</script>
+
+</body>
+</html>

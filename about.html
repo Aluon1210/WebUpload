@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About Us - Fintech Company</title>
+  <style>
+    *{
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        overflow: hidden;
+    }
+    .about-flex {
+        display: flex;
+    }
+    .left-box, .right-box {
+        width: 50%;
+        height: 100vh;
+        padding-top: 7%;
+        position: relative;
+    
+    }
+    .left-box{
+        background-color: white;
+    }
+    .right-box {
+        background-color:white;
+        padding: 2%;
+        padding-top : 7%;
+    }
+    .about-img  {
+        padding: 2%;
+    }
+    .about-img , .mission-box {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+    }
+    .about-img img {
+        width: 82%;
+        height: auto;
+        margin-bottom: 0;
+        border-radius: 8px;
+        display: block;
+        object-fit: cover;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+    }
+
+    .mission-box {
+        background-color: #215c5c;
+        right: 2%;
+        position: absolute;
+        width: 79%;
+        padding: 3%;
+        
+        border-radius: 8px;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+    }
+    h4 {
+        clear: both;
+        line-height: 25px;
+        font-size: 22px;
+        color: #fff;
+    }
+    .mission-box p {
+        font-size: 18px;
+        color: #fff;
+        line-height: 1.6;
+    }
+
+    .about-badge {
+        display: inline-block;
+        background-color: #ff9800;
+        color: #fff;
+        padding: 10px 20px;
+        margin: 2%;
+        border-radius: 20px;
+        font-size: 14px;
+        margin-bottom: 20px;
+    }
+
+    .right-box .about-title {
+        font-size: 32px;
+        font-weight: bold;
+        margin-bottom: 20px;
+        line-height: 40px;
+    }
+
+    
+    .about-desc {
+        font-size: 22px;
+        color: #333;
+        line-height: 1.4;
+        margin-bottom: 20px;
+    }
+        
+    .about-values {
+        display: flex;
+        flex-direction: row;
+        gap: 16px;
+        font-size: 18px;
+        line-height: 24px;
+        align-items: flex-start;
+    }
+    .about-value {
+        margin-bottom: 0;
+    }
+    .about-values-title {
+        font-size: 20px;
+        font-weight: bold;
+        margin: 24px 0 12px 0;
+    }
+
+
+    /* ==== RESPONSIVE DESIGN ==== */
+   /* Tablet: Từ 768px đến 1024px */
+@media (max-width: 1024px) {
+  .about-flex {
+    flex-direction: column;
+  }
+
+  .left-box, .right-box {
+    width: 100%;
+    height: auto;
+    padding: 6% 5%;
+  }
+
+  .mission-box {
+    position: static;
+    width: 100%;
+    margin-top: 20px;
+    padding: 4%;
+  }
+
+  .about-img {
+    justify-content: center;
+  }
+
+  .about-img img {
+    width: 95%;
+  }
+
+  .about-title {
+    font-size: 28px;
+    line-height: 1.4;
+  }
+
+  .about-desc {
+    font-size: 18px;
+  }
+
+  .about-values {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+}
+
+/* Mobile: Dưới 768px */
+@media (max-width: 767px) {
+  .about-flex {
+    flex-direction: column;
+  }
+
+  .left-box, .right-box {
+    width: 100%;
+    height: auto;
+    padding: 6% 5%;
+  }
+
+  .about-img {
+    justify-content: center;
+  }
+
+  .about-img img {
+    width: 100%;
+    border-radius: 10px;
+  }
+
+  .mission-box {
+    position: static;
+    width: 100%;
+    margin-top: 20px;
+    padding: 16px;
+  }
+
+  h4 {
+    font-size: 18px;
+  }
+
+  .mission-box p {
+    font-size: 15px;
+  }
+
+  .about-title {
+    font-size: 22px;
+    line-height: 1.3;
+  }
+
+  .about-desc {
+    font-size: 16px;
+  }
+
+  .about-values {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .about-values-title {
+    font-size: 18px;
+  }
+
+  .about-badge {
+    font-size: 13px;
+    padding: 6px 14px;
+  }
+}
+
+
+
+    /* ==== ANIMATION ==== */
+.fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.fade-in.appear {
+    opacity: 1;
+    transform: translateY(0);
+}
+</style>
+</head>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const faders = document.querySelectorAll(".fade-in");
+
+    const appearOptions = {
+      threshold: 0.2,
+      rootMargin: "0px 0px -50px 0px"
+    };
+
+    const appearOnScroll = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+
+        entry.target.classList.add("appear");
+        observer.unobserve(entry.target);
+      });
+    }, appearOptions);
+
+    faders.forEach(fader => {
+      appearOnScroll.observe(fader);
+    });
+  });
+</script>
+
+<body>
+ 
+    <div class="about-flex">
+
+        <div class="left-box">
+            <div class="about-img fade-in ">
+                <img src="./image/NguoiDaiDien.jpg" alt="About us image" title="hợp tác doanh nghiệp" />
+            </div>
+            <div class="mission-box" >
+                
+                <div class="mission-text fade-in ">
+                    <h4>TUYÊN BỐ SỨ MỆNH</h4>
+                    <p>Sứ mệnh của chúng tôi là trao quyền cho cá nhân và doanh nghiệp bằng cách cung cấp các dịch vụ tài chính an toàn, hiệu quả và thân thiện với người dùng.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="right-box">
+            <div class="about-content fade-in ">
+                <span class="about-badge">ABOUT US</span>
+                <h1 class="about-title">
+                  Dịch vụ tài chính an toàn, hiệu quả và thân thiện cho tương lai của bạn
+                </h1>
+                <p class="about-desc">
+                  Chúng tôi là công ty fintech tiên phong, cam kết thay đổi lĩnh vực tài chính với các giải pháp sáng tạo và an toàn, phù hợp cho cá nhân và doanh nghiệp.
+                </p>
+                <p class="about-desc">
+                  Nền tảng tiên tiến của chúng tôi đảm bảo giao dịch an toàn, liền mạch, giúp bạn quản lý tài chính một cách tự tin và thuận tiện.
+                </p>
+                <br>
+                
+                <div class="about-values-title">Giá trị cốt lõi &amp; Tầm nhìn</div>
+                <div class="about-values">
+                  <span class="about-value">🚀 Sáng tạo</span>
+                  <span class="about-value">🔒 Bảo mật</span>
+                  <br>
+                  <span class="about-value">👤 Lấy người dùng làm trung tâm</span>
+                  <span class="about-value">🔎 Minh bạch</span>
+                  <br>
+                  <span class="about-value">💪 Trao quyền</span>
+                </div>
+            </div>
+        </div>
+
+        
+
+    </div>
+
+
+</body>
+</html>

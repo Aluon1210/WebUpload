@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Giới thiệu</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/home.css"/>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      
+      background-color: white;
+      overflow: hidden;
+      max-height: 1200px;
+    }
+
+    .main-section {
+      padding-top: 120px;
+    }
+
+    .card-overlay {
+      position: absolute;
+      top: 93%;
+      left: 0%;
+      transform: translate(-50%, -50%);
+      width: 400px;
+      height: 300px ;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+      background: #fff;
+      z-index: 10;
+    }
+
+    .rounded-image img {
+      border-radius: 20px;
+      width: 80%;
+      height: auto;
+    }
+
+    .brand-logos img {
+      height: 30px;
+      margin: 0 15px;
+    }
+
+    .mb-1, .float-left {
+      text-align: left;
+    }
+
+    .fade-in {
+      opacity: 0;
+      animation: fadeInUp 1s ease-in-out forwards;
+      animation-delay: 0.3s;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .card-overlay {
+        position: relative;
+        transform: none;
+        left: 0;
+        bottom: 0;
+        margin-top: 20px;
+        width: 100%;
+      }
+    }
+
+
+/* Responsive cho mobile */  
+@media(max-width: 768px){  
+  /* Dạng cột */  
+  .row {  
+    flex-direction: column;  
+  }  
+
+  /* Ảnh to hơn, phù hợp */  
+  .rounded-image {  
+    margin-bottom: 20px;  
+  }  
+
+  /* Nội dung giữ nguyên */  
+  h1 {  
+    font-size: 1.8rem;  
+  }  
+  p {  
+    font-size: 1rem;  
+  }  
+  /* Nút bấm rộng hơn, dễ nhấn */  
+  .btn {  
+    width: 100%;  
+    margin-bottom: 10px;  
+  } 
+}
+/* == Respons
+ive cho Tablet (từ 769px - 1024px) == */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .main-section {
+    flex-direction: column;
+    padding: 30px;
+  }
+  .card-overlay {
+    position: relative;
+    transform: none;
+    left: 0;
+    top: auto;
+    width: 80%;           /* Chiếm 80% độ rộng màn hình tablet */
+    margin: 30px auto;
+  }
+  .brand-logos {
+    justify-content: center;
+    margin: 25px 0;
+  }
+}
+  </style>
+   
+</head>
+<body id="home-index">
+
+  
+
+  <div class="container-fluid main-section d-flex align-items-center">
+    <div class="row w-100 align-items-center px-5">
+      
+      <!-- Cột trái -->
+      <div class="col-md-6 mb-4 mb-md-0 fade-in">
+        <span class="badge bg-light text-success mb-3">GIỚI THIỆU BẢN THÂN</span>
+        <h1 class="display-5 fw-bold">Dương Thành Công</h1>
+        <p class="text-muted mb-4">
+          Tôi là sinh viên ngành Công nghệ Thông tin với niềm đam mê lập trình và phát triển phần mềm.
+          Tôi có kinh nghiệm làm việc với HTML, CSS, JavaScript và luôn sẵn sàng học hỏi công nghệ mới.
+          Mục tiêu của tôi là trở thành một lập trình viên chuyên nghiệp, đóng góp vào sự phát triển của lĩnh vực công nghệ.
+        </p>
+        <div class="mb-4">
+          <a href="#" class="btn btn-success me-2">Xem CV</a>
+          <a href="#" class="btn btn-outline-secondary">Liên hệ</a>
+        </div>
+        <div class="brand-logos d-flex align-items-center mt-4">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/6/69/Airbnb_Logo_Bélo.svg" alt="Airbnb"/>
+          <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg" alt="IBM"/>
+          <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" alt="Google"/>
+        </div>
+      </div>
+
+      <!-- Cột phải -->
+      <div class="col-md-6 position-relative text-center fade-in">
+        <div class="rounded-image mb-4">
+          <img src="./image/z6063753391188_8203c56b57d8cb571ff043f30219e4a7.jpg" class="img-fluid" alt="Ảnh cá nhân"/>
+        </div>
+        <div class="card card-overlay p-3">
+          <h5>Kỹ năng</h5>
+          <hr>
+          <ul class="text-start mb-2" style="padding-left: 1.2em;">
+            <li>Lập trình web (HTML, CSS, JavaScript)</li>
+            <li>Làm việc nhóm</li>
+            <li>Giao tiếp tốt</li>
+          </ul>
+          <hr>
+          <p class="mb-1">🎓 Sinh viên CNTT <span class="float-end">Năm 1</span></p>
+          <p class="mb-1">🏫 Trường <span class="float-end">Cao đằng Fpoly</span></p>
+          <p class="mb-1">📞 SĐT <span class="float-end">0123 456 789</span></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

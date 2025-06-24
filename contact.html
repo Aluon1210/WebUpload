@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Liên hệ</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #fff;
+      color: #222;
+      overflow: hidden;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 60px auto;
+      padding: 0 20px;
+    }
+
+    .contact-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .contact-header .badge {
+      display: inline-block;
+      background: #d2f2e3;
+      color: #205c4c;
+      padding: 6px 16px;
+      font-weight: 600;
+      border-radius: 10px;
+      margin-bottom: 12px;
+    }
+
+    .contact-header h1 {
+      font-size: 2rem;
+      font-weight: 800;
+      color: #205c4c;
+    }
+
+    .contact-header p {
+      font-size: 1.05rem;
+      color: #444;
+      max-width: 600px;
+      margin: 12px auto 0;
+    }
+
+    .contact-content {
+      display: flex;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+
+    .contact-info {
+      flex: 1 1 55%;
+    }
+
+    .contact-info-item {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 30px;
+    }
+
+    .contact-info-item span {
+      font-size: 1.5rem;
+      margin-right: 16px;
+      color: #205c4c;
+    }
+
+    .contact-info-item div {
+      color: #555;
+    }
+
+    .contact-info-item div strong {
+      display: block;
+      color: #000;
+      font-weight: 700;
+    }
+
+    .contact-form {
+      flex: 1 1 40%;
+    }
+
+    .contact-form form {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      padding: 12px 16px;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-family: inherit;
+      resize: vertical;
+    }
+
+    .contact-form textarea {
+      min-height: 120px;
+    }
+
+    .contact-form button {
+      padding: 12px 16px;
+      background-color: #205c4c;
+      color: #fff;
+      font-size: 1rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      width: 100%;
+    }
+
+    .contact-form button:hover {
+      background-color: #17463b;
+    }
+
+    @media (max-width: 900px) {
+      .contact-content {
+        flex-direction: column;
+      }
+
+      .contact-info,
+      .contact-form {
+        flex: 1 1 100%;
+      }
+    }
+
+    /* Animation styles */
+    .animate {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 0.6s ease-out;
+    }
+
+    .fade-up.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .fade-left {
+      transform: translateX(-60px);
+    }
+
+    .fade-left.show {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .fade-right {
+      transform: translateX(60px);
+    }
+
+    .fade-right.show {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    /* Confirm box overlay */
+    #confirmationBox {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 9999;
+      background: #e6fff2;
+      color: #205c4c;
+      padding: 30px;
+      border-radius: 12px;
+      border: 1px solid #b3e6d2;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+      min-width: 300px;
+      max-width: 80%;
+      text-align: center;
+      display: none;
+      animation: fadeIn 0.5s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translate(-50%, -60%);
+      }
+      to {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+      }
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 600px) {
+      .contact-header h1 {
+        font-size: 1.5rem;
+      }
+
+      .contact-header p {
+        font-size: 0.95rem;
+      }
+
+      .contact-info-item span {
+        font-size: 1.3rem;
+      }
+
+      .contact-info-item div strong {
+        font-size: 0.95rem;
+      }
+
+      .contact-form input,
+      .contact-form textarea,
+      .contact-form button {
+        font-size: 0.95rem;
+      }
+
+      .contact-form textarea {
+        min-height: 100px;
+      }
+      
+    }
+    #confirmationBox #closeConfirm {
+        position: absolute;
+        top: 10px;
+        right: 12px;
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #205c4c;
+        cursor: pointer;
+        padding: 0;
+        line-height: 1;
+      }
+      #confirmationBox #closeConfirm:hover {
+  color: #e74c3c;
+      }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <div class="contact-header animate fade-up">
+      <div class="badge">LIÊN HỆ</div>
+      <h1>Liên hệ với chúng tôi</h1>
+      <p>Sử dụng các công cụ của chúng tôi để phát triển các khái niệm của bạn và biến tầm nhìn của bạn thành hiện thực.</p>
+    </div>
+
+    <div class="contact-content">
+      <!-- Info -->
+      <div class="contact-info animate fade-left">
+        <div class="contact-info-item">
+          <span>📞</span>
+          <div><div>Điện thoại</div><strong>+(01 234 567 890)</strong></div>
+        </div>
+        <div class="contact-info-item">
+          <span>📧</span>
+          <div><div>E-mail</div><strong>info@mydomain.com</strong></div>
+        </div>
+        <div class="contact-info-item">
+          <span>📍</span>
+          <div><div>Địa chỉ</div><strong>123 Main Street, Springfield, IL</strong></div>
+        </div>
+      </div>
+
+      <!-- Form -->
+      <div class="contact-form animate fade-right">
+        <form id="contactForm">
+          <input type="text" id="name" placeholder="Tên" required />
+          <input type="email" id="email" placeholder="E-mail" required />
+          <input type="text" id="subject" placeholder="Chủ đề" />
+          <textarea id="message" placeholder="Tin nhắn" required></textarea>
+          <button type="submit">Gửi liên hệ</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Xác nhận trung tâm màn hình -->
+  <div id="confirmationBox">
+    
+    <strong>✅ Cảm ơn bạn đã gửi liên hệ!</strong>
+    <p id="confirmName"></p>
+    <p id="confirmEmail"></p>
+    <p id="confirmSubject"></p>
+    <p id="confirmMessage"></p>
+    <button id="closeConfirm" type="button">X</button>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // Animate on scroll
+      const elements = document.querySelectorAll('.animate');
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('show');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1 });
+      elements.forEach(el => observer.observe(el));
+
+      // Handle form submit
+      const form = document.getElementById('contactForm');
+      const confirmationBox = document.getElementById('confirmationBox');
+      const nameEl = document.getElementById('name');
+      const emailEl = document.getElementById('email');
+      const subjectEl = document.getElementById('subject');
+      const messageEl = document.getElementById('message');
+
+    
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        document.getElementById('confirmName').textContent = `👤 Tên: ${nameEl.value}`;
+        document.getElementById('confirmEmail').textContent = `📧 Email: ${emailEl.value}`;
+        document.getElementById('confirmSubject').textContent = `📌 Chủ đề: ${subjectEl.value || '(Không có)'}`;
+        document.getElementById('confirmMessage').textContent = `💬 Tin nhắn: ${messageEl.value}`;
+
+        confirmationBox.style.display = 'block';
+        confirmationBox.style.animation = 'fadeIn 0.5s ease-out';
+
+        form.reset();
+      });
+
+      // Close confirmation box
+      document.getElementById('closeConfirm').addEventListener('click', function () {
+        confirmationBox.style.display = 'none';
+      });
+    });
+  </script>
+</body>
+</html>

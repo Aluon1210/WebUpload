@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+      /* footer.css */
+body {
+  font-family: Arial, sans-serif;
+}
+
+/* Căn chỉnh chung */  
+body {  
+  font-family: Arial, sans-serif;  
+  margin: 0;  
+  padding: 0;  
+  box-sizing: border-box;  
+}  
+
+/* Footer chung */  
+.footer {  
+  background-color: #f9fafb;  
+  color: #1f2937;  
+  width: 100%;  
+  padding: 30px 20px;  
+  /* bỏ absolute nếu có để nội dung tự nhiên */  
+}  
+
+/* Container tùy chỉnh */  
+.footer-container {  
+  max-width: 1200px;  
+  margin: 0 auto;  
+}  
+
+/* Thư viện newsletter */  
+.newsletter h2 {  
+  font-size: 20px;  
+  font-weight: 600;  
+  margin-bottom: 10px;  
+}  
+
+.newsletter p {  
+  font-size: 14px;  
+  color: #4b5563;  
+  margin-top: 10px;  
+}  
+
+/* Form */  
+.newsletter-form {  
+  display: flex;  
+  flex-direction: row;  
+  margin-top: 15px;  
+  max-width: 100%;  
+}  
+
+.newsletter-form input {  
+  flex: 1;  
+  padding: 10px;  
+  border: 1px solid #d1d5db;  
+  border-radius: 6px 0 0 6px;  
+  outline: none;  
+  font-size: 14px;  
+}  
+
+.newsletter-form button {  
+  padding: 10px 20px;  
+  background-color: #14532d;  
+  color: #fff;  
+  border: none;  
+  border-radius: 0 6px 6px 0;  
+  cursor: pointer;  
+  font-weight: 600;  
+  font-size: 14px;  
+}  
+
+.newsletter-form button:hover {  
+  background-color: #0e3b1d;  
+}  
+
+/* Các cột */  
+.footer-columns {  
+  display: flex;  
+  flex-wrap: wrap;  
+  gap: 20px;  
+  margin-top: 30px;  
+}  
+
+.footer-column {  
+  flex: 1 1 150px; /* tối thiểu 150px hoặc phù hợp */  
+  min-width: 150px;  
+}  
+
+.footer-column h3 {  
+  font-size: 16px;  
+  font-weight: 600;  
+  margin-bottom: 8px;  
+}  
+
+.footer-column ul {  
+  list-style: none;  
+  padding: 0;  
+  margin: 0;  
+}  
+
+.footer-column ul li {  
+  margin-bottom: 8px;  
+  font-size: 14px;  
+}  
+
+/* Liên kết */  
+.footer-column ul li a {  
+  color: #4b5563;  
+  text-decoration: none;  
+}  
+.footer-column ul li a:hover {  
+  text-decoration: underline;  
+}  
+
+/* Badge */  
+.badge {  
+  background-color: #e2e8f0;  
+  color: #111827;  
+  font-size: 12px;  
+  padding: 2px 6px;  
+  border-radius: 4px;  
+  margin-left: 4px;  
+}  
+
+/* Chân trang cuối */  
+.footer-bottom {  
+  border-top: 1px solid #e5e7eb;  
+  margin-top: 30px;  
+  padding-top: 15px;  
+  text-align: center;  
+  font-size: 13px;  
+  color: #6b7280;  
+}  
+
+.footer-bottom a {  
+  color: #4b5563;  
+  margin: 0 8px;  
+  text-decoration: none;  
+}  
+.footer-bottom a:hover {  
+  text-decoration: underline;  
+}  
+@media (max-width: 768px) {
+  body {
+    padding: 10px;
+    width: 100%;
+    overflow-x: hidden;
+  }
+  .footer,
+  .footer-container {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 100%;
+  }
+  .footer-columns {
+    flex-direction: column;
+    gap: 20px;
+  }
+  .footer-column {
+    max-width: 100%;
+  }
+  .newsletter-form {
+    flex-direction: column;
+    gap: 10px;
+    padding: 5px;
+  }
+}
+
+    </style>
+</head>
+<body>
+    <!-- footer.html -->
+<footer class="footer">
+  <div class="footer-container">
+    <div class="newsletter">
+      <h2>Tham gia bản tin của chúng tôi</h2>
+      <p>Hãy cập nhật những mẫu và ưu đãi mới nhất của chúng tôi—hãy đăng ký nhận bản tin ngay hôm nay!</p>
+      <div class="newsletter-form">
+        <input type="email" placeholder="Gửi email của bạn" />
+        <button>Đặt mua</button>
+      </div>
+    </div>
+
+    <div class="footer-columns">
+      <div class="footer-column">
+        <h3>Về</h3>
+        <p>
+          Sử dụng các công cụ của chúng tôi để phát triển các khái niệm của bạn và biến tầm nhìn của bạn thành hiện thực. Sau khi hoàn thành, hãy dễ dàng chia sẻ sáng tạo của bạn.
+        </p>
+      </div>
+
+      <div class="footer-column">
+        <h3>Công ty</h3>
+        <ul>
+          <li><a href="#">Khả năng lãnh đạo</a></li>
+          <li><a href="#">Nghề nghiệp <span class="badge">chúng tôi đang tuyển dụng</span></a></li>
+          <li><a href="#">Nghiên cứu trường hợp</a></li>
+          <li><a href="#">Điều khoản & Điều kiện</a></li>
+          <li><a href="#">Chính sách bảo mật</a></li>
+          <li><a href="#">trang 404</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-column">
+        <h3>Tài khoản</h3>
+        <ul>
+          <li><a href="#">Đăng ký</a></li>
+          <li><a href="#">Đăng nhập</a></li>
+          <li><a href="#">Mật khẩu Fogot</a></li>
+          <li><a href="#">Sắp ra mắt</a></li>
+          <li><a href="#">Danh mục đầu tư Masonry</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-column">
+        <h3>Liên hệ</h3>
+        <ul>
+          <li><i class="fa fa-map-marker"></i> 123 Main Street Apt 4B, Springfield, IL 62701 Hoa Kỳ</li>
+          <li><i class="fa fa-envelope"></i> info@mydomain.com</li>
+          <li><i class="fa fa-phone"></i> +1 (234) 5678 9900</li>
+          <li><i class="fa fa-globe"></i> FreeBootstrap.net</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>© 2025 Nova. Mọi quyền được bảo lưu. Được thiết kế với ❤️ bởi <a href="#">FreeBootstrap.net</a></p>
+    <div class="footer-bottom-links">
+      <a href="#">Điều khoản và điều kiện</a>
+      <a href="#">Chính sách bảo mật</a>
+      <a href="#">Chính sách Cookie</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

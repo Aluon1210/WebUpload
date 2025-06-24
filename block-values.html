@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .milestone {
+  padding: 80px 40px;
+  background-color: #fff;
+  font-family: 'Segoe UI', sans-serif;
+  overflow: hidden;
+}
+
+.milestone-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.milestone-text {
+  flex: 1 1 50%;
+}
+
+.milestone-text h2 {
+  font-size: 2rem;
+  color: #111;
+  margin-bottom: 20px;
+}
+
+.milestone-text p {
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 30px;
+  line-height: 1.6;
+}
+
+.milestone-stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.milestone-stats div {
+  font-size: 1.1rem;
+  color: #2e625d;
+}
+
+.milestone-stats strong {
+  font-size: 1.5rem;
+  color: #215c5c;
+}
+
+.milestone-image {
+  flex: 1 1 40%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.image-grid {
+  width: 100%;
+  max-width: 400px;
+  position: relative;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+/* Fancy image split/grid effect (simplified) */
+.image-grid::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    linear-gradient(white 1px, transparent 1px),
+    linear-gradient(to right, white 1px, transparent 1px);
+  background-size: 33.33% 33.33%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.image-grid img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 12px;
+}
+
+    </style>
+</head>
+<body>
+    <section class="milestone">
+  <div class="milestone-container">
+    <div class="milestone-text">
+      <h2>Kỷ niệm những cột mốc quan trọng<br> và sự thành thạo trong phát triển phần mềm</h2>
+      <p>
+        Với nhiều dự án đã hoàn thành thành công, vô số dòng mã đã viết và nhiều năm kinh nghiệm trong ngành, nhóm của chúng tôi cung cấp các giải pháp hàng đầu đáp ứng và vượt quá mong đợi của khách hàng.
+      </p>
+      <div class="milestone-stats">
+        <div><strong>150 +</strong><br><span>Các dự án đã hoàn thành</span></div>
+        <div><strong>200 nghìn</strong><br><span>Dòng mã</span></div>
+        <div><strong>10 +</strong><br><span>Số năm kinh nghiệm</span></div>
+        <div><strong>550 +</strong><br><span>Khách hàng hài lòng</span></div>
+      </div>
+    </div>
+    <div class="milestone-image">
+      <div class="image-grid">
+        <img src="./image/NguoiDaiDien.jpg" alt="Người đại diện" />
+      </div>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>

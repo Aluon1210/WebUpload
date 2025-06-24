@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Tải lên và xem trước hình ảnh</title>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Be Vietnam Pro', sans-serif;
+      margin: 0;
+      padding: 40px;
+      background-color: #f7f7f8;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 28px;
+      font-weight: 700;
+    }
+
+    p.description {
+      text-align: center;
+      color: #555;
+      margin-top: 8px;
+    }
+
+    .container {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      margin-top: 40px;
+      flex-wrap: wrap;
+    }
+
+    .upload-section,
+    .preview-section {
+      background: #fff;
+      padding: 32px;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+      width: 400px;
+      min-height: 300px;
+    }
+
+    .drop-zone {
+      border: 2px dashed #215c5c;
+      border-radius: 12px;
+      height: 240px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      text-align: center;
+      transition: background-color 0.2s ease;
+    }
+
+    .drop-zone:hover,
+    .drop-zone.dragover {
+      background: #f1f1f1;
+    }
+
+    .drop-zone img {
+      width: 48px;
+      height: 48px;
+      margin-bottom: 16px;
+    }
+
+    .drop-zone p {
+      font-size: 20px;
+      font-weight: 700;
+      color: #222;
+      margin: 0;
+    }
+
+    .drop-zone small {
+      color: #777;
+      margin-top: 8px;
+    }
+
+    input[type="file"] {
+      display: none;
+    }
+
+    .preview-box {
+      height: 240px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      overflow: hidden;
+      margin-bottom: 20px;
+    }
+
+    .preview-box img {
+      max-width: 100%;
+      max-height: 100%;
+      display: block;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+    }
+
+    .buttons button {
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .delete-btn {
+      background: #6c757d;
+      color: white;
+    }
+
+    .download-btn {
+      background: #215c5c;
+      color: white;
+    }
+
+  </style>
+</head>
+<body>
+
+  <h1>Tải lên và xem trước hình ảnh</h1>
+  <p class="description">Sử dụng công nghệ HTML5 Canvas và Drag & Drop để xử lý hình ảnh</p>
+
+  <div class="container">
+    <!-- Upload section -->
+    <div class="upload-section">
+      <label class="drop-zone" id="drop-zone">
+        <img src="https://cdn-icons-png.flaticon.com/512/1828/1828919.png" alt="upload icon">
+        <p>Kéo thả hình ảnh vào đây</p>
+        <small>hoặc nhấp để chọn file</small>
+        <input type="file" id="file-input" accept="image/*">
+      </label>
+    </div>
+
+    <!-- Preview section -->
+    <div class="preview-section">
+      <div class="preview-box" id="preview">
+        <p style="color:#aaa">Tải lên hình ảnh để xem trước</p>
+      </div>
+      <div class="buttons">
+        <button class="delete-btn" onclick="clearImage()">Xóa</button>
+        <button class="download-btn" onclick="downloadImage()">Tải xuống</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const fileInput = document.getElementById("file-input");
+    const dropZone = document.getElementById("drop-zone");
+    const preview = document.getElementById("preview");
+    let currentImageData = null;
+
+    // Click để mở chọn file
+    dropZone.addEventListener("click", () => fileInput.click());
+
+    // Khi chọn file
+    fileInput.addEventListener("change", (e) => {
+      const file = e.target.files[0];
+      if (file && file.type.startsWith("image/")) {
+        showPreview(file);
+      }
+    });
+
+    // Drag over
+    dropZone.addEventListener("dragover", (e) => {
+      e.preventDefault();
+      dropZone.classList.add("dragover");
+    });
+
+    dropZone.addEventListener("dragleave", () => {
+      dropZone.classList.remove("dragover");
+    });
+
+    dropZone.addEventListener("drop", (e) => {
+      e.preventDefault();
+      dropZone.classList.remove("dragover");
+      const file = e.dataTransfer.files[0];
+      if (file && file.type.startsWith("image/")) {
+        fileInput.files = e.dataTransfer.files; // optional
+        showPreview(file);
+      }
+    });
+
+    function showPreview(file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        currentImageData = e.target.result;
+        preview.innerHTML = `<img src="${currentImageData}" alt="preview">`;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function clearImage() {
+      preview.innerHTML = `<p style="color:#aaa">Tải lên hình ảnh để xem trước</p>`;
+      fileInput.value = "";
+      currentImageData = null;
+    }
+
+    function downloadImage() {
+      if (!currentImageData) return;
+      const link = document.createElement("a");
+      link.href = currentImageData;
+      link.download = "image.png";
+      link.click();
+    }
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Câu hỏi thường gặp</title>
+  <style>
+    body {
+  font-family: 'Segoe UI', sans-serif;
+  background: #f9f9f9;
+  margin: 0;
+  padding: 40px 20px;
+}
+
+.faq-section {
+  max-width: 800px;
+  margin: auto;
+  text-align: center;
+}
+
+.faq-title {
+  font-size: 2rem;
+  color: #222;
+  margin-bottom: 10px;
+}
+
+.faq-subtitle {
+  color: #666;
+  margin-bottom: 40px;
+}
+
+.faq-container {
+  text-align: left;
+}
+
+.faq-item {
+  background: white;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  overflow: hidden;
+}
+
+.faq-question {
+  width: 100%;
+  padding: 20px;
+  font-size: 1.1rem;
+  background: none;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  font-weight: 600;
+  color: #333;
+  position: relative;
+}
+
+.faq-question::after {
+  content: '+';
+  position: absolute;
+  right: 20px;
+  font-size: 1.2rem;
+  transition: transform 0.3s;
+}
+
+.faq-item.active .faq-question::after {
+  content: '−';
+}
+
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease;
+  padding: 0 20px;
+  background-color: #fdfdfd;
+}
+
+.faq-item.active .faq-answer {
+  padding: 15px 20px 20px;
+  max-height: 300px; /* large enough to show content */
+}
+
+  </style>
+</head>
+<body>
+
+<section class="faq-section">
+  <h2 class="faq-title">Những câu hỏi thường gặp</h2>
+  <p class="faq-subtitle">Sử dụng các công cụ của chúng tôi để phát triển các khái niệm của bạn và biến tầm nhìn của bạn thành hiện thực.</p>
+
+  <div class="faq-container">
+
+    <!-- Câu hỏi 1 -->
+    <div class="faq-item">
+      <button class="faq-question">Công ty thiết kế web của bạn cung cấp những dịch vụ gì?</button>
+      <div class="faq-answer">
+        <p>Cơ quan web của chúng tôi cung cấp một loạt các dịch vụ toàn diện bao gồm thiết kế và phát triển web, giải pháp thương mại điện tử, tối ưu hóa SEO, tạo nội dung, bảo trì trang web và chiến lược tiếp thị kỹ thuật số. Chúng tôi điều chỉnh các dịch vụ của mình để đáp ứng nhu cầu riêng biệt của từng khách hàng, đảm bảo phương pháp tiếp cận tùy chỉnh cho mọi dự án.</p>
+      </div>
+    </div>
+
+    <!-- Câu hỏi 2 -->
+    <div class="faq-item">
+      <button class="faq-question">Xây dựng một trang web tốn bao nhiêu tiền?</button>
+      <div class="faq-answer">
+        <p>Chi phí xây dựng một trang web có thể thay đổi rất nhiều tùy thuộc vào độ phức tạp, tính năng và yêu cầu cụ thể của dự án của bạn. Chúng tôi cung cấp một số gói giá để phù hợp với các ngân sách và nhu cầu khác nhau. Sau khi tham vấn ban đầu, chúng tôi có thể cung cấp báo giá chi tiết dựa trên các mục tiêu và mục đích cụ thể của bạn.</p>
+      </div>
+    </div>
+
+    <!-- Câu hỏi 3 -->
+    <div class="faq-item">
+      <button class="faq-question">Phải mất bao lâu để thiết kế và phát triển một trang web?</button>
+      <div class="faq-answer">
+        <p>Thời gian thiết kế và phát triển một trang web phụ thuộc vào mức độ phức tạp và phạm vi của dự án. Thông thường, một trang web kinh doanh tiêu chuẩn mất khoảng 4-6 tuần để hoàn thành, trong khi các dự án phức tạp hơn như trang web thương mại điện tử hoặc ứng dụng tùy chỉnh có thể mất nhiều thời gian hơn. Chúng tôi làm việc chặt chẽ với khách hàng để thiết lập một thời gian thực tế và thông báo cho bạn trong suốt quá trình.</p>
+      </div>
+    </div>
+
+    <!-- Câu hỏi 4 -->
+    <div class="faq-item">
+      <button class="faq-question">Trang web của tôi có thân thiện với thiết bị di động không?</button>
+      <div class="faq-answer">
+        <p>Chắc chắn rồi! Tất cả các trang web chúng tôi thiết kế và phát triển đều hoàn toàn đáp ứng, nghĩa là chúng được tối ưu hóa để hoạt động liền mạch trên mọi thiết bị, bao gồm máy tính để bàn, máy tính bảng và điện thoại thông minh. Đảm bảo trải nghiệm người dùng tuyệt vời trên thiết bị di động là ưu tiên hàng đầu trong quy trình phát triển của chúng tôi.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<script src="main/faq.js"></script>
+</body>
+</html>
