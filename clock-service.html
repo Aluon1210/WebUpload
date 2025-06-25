@@ -3,209 +3,196 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Dịch vụ</title>
+  <title>Dịch vụ tài chính</title>
   <style>
-    :root {
-      --primary: #16a34a;
-      --text: #111827;
-      --subtext: #4b5563;
-      --bg: #ffffff;
-      --card-bg: #fff;
-      --border: #e5e7eb;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      overflow-x: hidden;
-    }
-
     body {
       font-family: 'Segoe UI', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.6;
+      background: #f7f7f7;
+      color: #222;
+      margin: 0;
+      padding: 0;
     }
-
-    section {
-      padding: 60px 20px;
+    .service-section {
+      max-width: 480px;
+      margin: 0 auto;
+      padding: 18px 0 32px 0;
     }
-
-    .container {
-      max-width: 1200px;
-      margin: auto;
-    }
-
-    .subtitle {
+    .service-title {
       text-align: center;
+      color: #16a34a;
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      margin-bottom: 6px;
       text-transform: uppercase;
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--primary);
-      margin-bottom: 10px;
     }
-
-    h2.title {
+    .service-main-title {
       text-align: center;
-      font-size: 28px;
+      font-size: 1.5rem;
       font-weight: bold;
-      margin-bottom: 40px;
+      margin-bottom: 18px;
+      color: #215c5c;
     }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 20px;
+    .service-list {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      padding: 0 10px;
     }
-
-    .card {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
+    .service-card {
+      background: #fff;
       border-radius: 16px;
-      padding: 24px;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      opacity: 0;
-      transform: translateY(30px);
+      box-shadow: 0 2px 12px rgba(22,163,74,0.07);
+      padding: 18px 16px 14px 16px;
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      border: 1px solid #e5e7eb;
+      transition: box-shadow 0.2s;
     }
-
-    .card.visible {
-      animation: fadeInUp 0.6s ease forwards;
+    .service-card:active, .service-card:focus {
+      box-shadow: 0 4px 18px rgba(22,163,74,0.13);
+      border-color: #16a34a;
     }
-
-    .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 20px rgba(0,0,0,0.08);
-    }
-
-    .card img {
-      width: 40px;
-      height: 40px;
-      object-fit: contain;
-      margin-bottom: 12px;
-    }
-
-    .card h3 {
-      font-size: 18px;
-      font-weight: 600;
-      margin-bottom: 8px;
-    }
-
-    .card p {
-      color: var(--subtext);
-      font-size: 15px;
-      margin-bottom: 16px;
-    }
-
-    .read-more {
-      color: var(--primary);
-      font-weight: 500;
-      text-decoration: none;
-      display: inline-flex;
+    .service-icon {
+      width: 48px;
+      height: 48px;
+      flex-shrink: 0;
+      border-radius: 12px;
+      background: #e6f4ea;
+      display: flex;
       align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      overflow: hidden;
     }
-
-    .read-more:hover {
+    .service-icon img {
+      width: 36px;
+      height: 36px;
+      object-fit: contain;
+      display: block;
+    }
+    .service-info {
+      flex: 1;
+    }
+    .service-info h3 {
+      font-size: 1.08rem;
+      font-weight: 700;
+      margin: 0 0 4px 0;
+      color: #215c5c;
+    }
+    .service-info p {
+      font-size: 0.98rem;
+      color: #4b5563;
+      margin: 0 0 8px 0;
+    }
+    .service-more {
+      color: #16a34a;
+      font-weight: 600;
+      font-size: 0.98rem;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .service-more:hover {
+      color: #0e7c3a;
       text-decoration: underline;
     }
-
-    .read-more::after {
-      content: ' →';
-      font-size: 14px;
-      margin-left: 6px;
-    }
-
-    @keyframes fadeInUp {
-      to {
-        opacity: 1;
-        transform: translateY(0);
+    @media (min-width: 600px) {
+      .service-section {
+        max-width: 700px;
+        padding: 32px 0 48px 0;
       }
-    }
-
-    @media (max-width: 768px) {
-      h2.title {
-        font-size: 22px;
+      .service-main-title {
+        font-size: 2rem;
       }
-
-      .card {
-        padding: 20px;
+      .service-list {
+        gap: 22px;
+        padding: 0 30px;
+      }
+      .service-card {
+        padding: 22px 24px 18px 24px;
+      }
+      .service-icon {
+        width: 56px;
+        height: 56px;
+      }
+      .service-icon img {
+        width: 44px;
+        height: 44px;
       }
     }
   </style>
 </head>
 <body>
-
-<section>
-  <div class="container">
-    <p class="subtitle">Dịch vụ của chúng tôi</p>
-    <h2 class="title">Trao quyền cho sự đổi mới tài chính<br>qua các dịch vụ tiên tiến</h2>
-
-    <div class="grid">
-      <div class="card">
-        <img src="https://cdn-icons-png.flaticon.com/512/1087/1087815.png" alt="">
-        <h3>Thanh toán kỹ thuật số</h3>
-        <p>Giao dịch liền mạch và an toàn thông qua nhiều nền tảng kỹ thuật số khác nhau.</p>
-        <a href="#" class="read-more">Đọc thêm</a>
+  <div class="service-section">
+    <div class="service-title">Dịch vụ của chúng tôi</div>
+    <div class="service-main-title">Đổi mới tài chính với các dịch vụ hiện đại</div>
+    <div class="service-list">
+      <div class="service-card">
+        <div class="service-icon"><img src="https://cdn-icons-png.flaticon.com/512/1087/1087815.png" alt=""></div>
+        <div class="service-info">
+          <h3>Thanh toán kỹ thuật số</h3>
+          <p>Giao dịch liền mạch, an toàn qua nhiều nền tảng kỹ thuật số khác nhau.</p>
+          <a href="#" class="service-more">Đọc thêm</a>
+        </div>
       </div>
-      <div class="card">
-        <img src="https://cdn-icons-png.flaticon.com/512/456/456212.png" alt="">
-        <h3>Quản lý tài chính cá nhân</h3>
-        <p>Giao dịch nhanh chóng và đơn giản qua các công cụ trực tuyến thông minh.</p>
-        <a href="#" class="read-more">Đọc thêm</a>
+      <div class="service-card">
+        <div class="service-icon"><img src="https://cdn-icons-png.flaticon.com/512/456/456212.png" alt=""></div>
+        <div class="service-info">
+          <h3>Quản lý tài chính cá nhân</h3>
+          <p>Giao dịch nhanh chóng, đơn giản qua các công cụ trực tuyến thông minh.</p>
+          <a href="#" class="service-more">Đọc thêm</a>
+        </div>
       </div>
-      <div class="card">
-        <img src="https://cdn-icons-png.flaticon.com/512/1828/1828919.png" alt="">
-        <h3>Cho vay trực tuyến</h3>
-        <p>Giải pháp vay nhanh chóng, dễ tiếp cận và minh bạch quy trình xử lý.</p>
-        <a href="#" class="read-more">Đọc thêm</a>
+      <div class="service-card">
+        <div class="service-icon"><img src="https://cdn-icons-png.flaticon.com/512/1828/1828919.png" alt=""></div>
+        <div class="service-info">
+          <h3>Cho vay trực tuyến</h3>
+          <p>Giải pháp vay nhanh, dễ tiếp cận, minh bạch quy trình xử lý.</p>
+          <a href="#" class="service-more">Đọc thêm</a>
+        </div>
       </div>
-      <div class="card">
-        <img src="https://cdn-icons-png.flaticon.com/512/3075/3075977.png" alt="">
-        <h3>Đầu tư thông minh</h3>
-        <p>Các giải pháp đầu tư phù hợp với mục tiêu tài chính của bạn.</p>
-        <a href="#" class="read-more">Đọc thêm</a>
+      <div class="service-card">
+        <div class="service-icon"><img src="https://cdn-icons-png.flaticon.com/512/3075/3075977.png" alt=""></div>
+        <div class="service-info">
+          <h3>Đầu tư thông minh</h3>
+          <p>Giải pháp đầu tư phù hợp với mục tiêu tài chính của bạn.</p>
+          <a href="#" class="service-more">Đọc thêm</a>
+        </div>
       </div>
-      <div class="card">
-        <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="">
-        <h3>Bảo hiểm số</h3>
-        <p>Giải pháp bảo hiểm linh hoạt, quản lý dễ dàng qua nền tảng số.</p>
-        <a href="#" class="read-more">Đọc thêm</a>
+      <div class="service-card">
+        <div class="service-icon"><img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt=""></div>
+        <div class="service-info">
+          <h3>Bảo hiểm số</h3>
+          <p>Bảo hiểm linh hoạt, quản lý dễ dàng qua nền tảng số.</p>
+          <a href="#" class="service-more">Đọc thêm</a>
+        </div>
       </div>
-      <div class="card">
-        <img src="https://cdn-icons-png.flaticon.com/512/5520/5520491.png" alt="">
-        <h3>Chuyển tiền quốc tế</h3>
-        <p>Chuyển tiền nhanh, an toàn với chi phí thấp đến nhiều quốc gia.</p>
-        <a href="#" class="read-more">Đọc thêm</a>
+      <div class="service-card">
+        <div class="service-icon"><img src="https://cdn-icons-png.flaticon.com/512/5520/5520491.png" alt=""></div>
+        <div class="service-info">
+          <h3>Chuyển tiền quốc tế</h3>
+          <p>Chuyển tiền nhanh, an toàn với chi phí thấp đến nhiều quốc gia.</p>
+          <a href="#" class="service-more">Đọc thêm</a>
+        </div>
       </div>
-      <div class="card">
-        <img src="https://cdn-icons-png.flaticon.com/512/3135/3135789.png" alt="">
-        <h3>Tư vấn tài chính</h3>
-        <p>Nhận tư vấn cá nhân hóa giúp bạn tối ưu hóa kế hoạch tài chính.</p>
-        <a href="#" class="read-more">Đọc thêm</a>
+      <div class="service-card">
+        <div class="service-icon"><img src="https://cdn-icons-png.flaticon.com/512/3135/3135789.png" alt=""></div>
+        <div class="service-info">
+          <h3>Tư vấn tài chính</h3>
+          <p>Nhận tư vấn cá nhân hóa giúp bạn tối ưu hóa kế hoạch tài chính.</p>
+          <a href="#" class="service-more">Đọc thêm</a>
+        </div>
       </div>
-      <div class="card">
-        <img src="https://cdn-icons-png.flaticon.com/512/1828/1828961.png" alt="">
-        <h3>Quản lý chi tiêu doanh nghiệp</h3>
-        <p>Giải pháp kiểm soát và tối ưu hóa chi tiêu cho doanh nghiệp mọi quy mô.</p>
-        <a href="#" class="read-more">Đọc thêm</a>
+      <div class="service-card">
+        <div class="service-icon"><img src="https://cdn-icons-png.flaticon.com/512/1828/1828961.png" alt=""></div>
+        <div class="service-info">
+          <h3>Quản lý chi tiêu doanh nghiệp</h3>
+          <p>Kiểm soát và tối ưu hóa chi tiêu cho doanh nghiệp mọi quy mô.</p>
+          <a href="#" class="service-more">Đọc thêm</a>
+        </div>
       </div>
     </div>
   </div>
-</section>
-
-<script>
-  const cards = document.querySelectorAll('.card');
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.2 });
-
-  cards.forEach(card => observer.observe(card));
-</script>
-
 </body>
 </html>
