@@ -13,7 +13,7 @@
       font-family: 'Segoe UI', sans-serif;
       background: #f0f2f5;
       margin: 0;
-      padding: 20px;
+      padding: 10px;
       min-height: 100vh;
       display: flex;
       align-items: center;
@@ -37,6 +37,7 @@
     .canvas-header h2 {
       color: #333;
       margin: 0 0 10px 0;
+      font-size: 1.5rem;
     }
 
     .toolbar {
@@ -45,10 +46,11 @@
       margin-bottom: 20px;
       justify-content: center;
       flex-wrap: wrap;
+      align-items: center;
     }
 
     .tool-btn {
-      padding: 10px 20px;
+      padding: 12px 20px;
       border: none;
       border-radius: 8px;
       background: #007bff;
@@ -56,15 +58,18 @@
       cursor: pointer;
       font-size: 14px;
       font-weight: 600;
-      transition: background 0.2s;
+      transition: all 0.2s;
+      min-width: 80px;
     }
 
     .tool-btn:hover {
       background: #0056b3;
+      transform: translateY(-1px);
     }
 
     .tool-btn.active {
       background: #28a745;
+      box-shadow: 0 2px 8px rgba(40, 167, 69, 0.3);
     }
 
     .tool-btn.clear {
@@ -83,12 +88,52 @@
       background: #138496;
     }
 
+    .color-picker {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 10px 0;
+    }
+
+    .color-picker label {
+      font-weight: 600;
+      color: #333;
+      font-size: 14px;
+    }
+
+    .color-picker input[type="color"] {
+      width: 40px;
+      height: 40px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      background: none;
+    }
+
+    .brush-size {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 10px 0;
+    }
+
+    .brush-size label {
+      font-weight: 600;
+      color: #333;
+      font-size: 14px;
+    }
+
+    .brush-size input[type="range"] {
+      width: 100px;
+    }
+
     .canvas-wrapper {
       text-align: center;
       background: #f8f9fa;
       border-radius: 8px;
       padding: 20px;
       border: 2px dashed #dee2e6;
+      margin-bottom: 20px;
     }
 
     #drawingCanvas {
@@ -98,36 +143,106 @@
       cursor: crosshair;
       max-width: 100%;
       height: auto;
+      touch-action: none;
     }
 
     .canvas-info {
       margin-top: 15px;
       color: #666;
       font-size: 14px;
+      text-align: center;
+    }
+
+    .mobile-tips {
+      background: #e3f2fd;
+      border-radius: 8px;
+      padding: 15px;
+      margin-top: 15px;
+      border-left: 4px solid #2196f3;
+    }
+
+    .mobile-tips h4 {
+      margin: 0 0 10px 0;
+      color: #1976d2;
+      font-size: 16px;
+    }
+
+    .mobile-tips ul {
+      margin: 0;
+      padding-left: 20px;
+      color: #424242;
+    }
+
+    .mobile-tips li {
+      margin-bottom: 5px;
+      font-size: 14px;
     }
 
     @media (max-width: 768px) {
       body {
-        padding: 10px;
+        padding: 5px;
+        align-items: flex-start;
       }
 
       .canvas-container {
         padding: 15px;
+        margin-top: 10px;
       }
 
-      #drawingCanvas {
-        width: 100%;
-        height: 300px;
+      .canvas-header h2 {
+        font-size: 1.3rem;
       }
 
       .toolbar {
         flex-direction: column;
-        align-items: center;
+        align-items: stretch;
+        gap: 8px;
       }
 
       .tool-btn {
         width: 100%;
-        max-width: 200px;
+        padding: 15px;
+        font-size: 16px;
+        border-radius: 10px;
+      }
+
+      .color-picker, .brush-size {
+        justify-content: center;
+        margin: 15px 0;
+      }
+
+      .color-picker input[type="color"] {
+        width: 50px;
+        height: 50px;
+      }
+
+      .brush-size input[type="range"] {
+        width: 150px;
+      }
+
+      .canvas-wrapper {
+        padding: 15px;
+        margin-bottom: 15px;
+      }
+
+      #drawingCanvas {
+        width: 100%;
+        height: 350px;
+        max-height: 60vh;
+      }
+
+      .canvas-info {
+        font-size: 13px;
+      }
+
+      .mobile-tips {
+        display: block;
+      }
+    }
+
+    @media (min-width: 769px) {
+      .mobile-tips {
+        display: none;
       }
     }
   </style>
@@ -135,21 +250,42 @@
 <body>
   <div class="canvas-container">
     <div class="canvas-header">
-      <h2>Bảng vẽ đơn giản</h2>
+      <h2>🎨 Bảng vẽ đơn giản</h2>
     </div>
 
     <div class="toolbar">
-      <button class="tool-btn active" id="penTool">Bút vẽ</button>
-      <button class="tool-btn" id="eraserTool">Tẩy</button>
-      <button class="tool-btn clear" id="clearCanvas">Xóa tất cả</button>
-      <button class="tool-btn save" id="saveCanvas">Lưu</button>
+      <button class="tool-btn active" id="penTool">✏️ Bút vẽ</button>
+      <button class="tool-btn" id="eraserTool">🧽 Tẩy</button>
+      <button class="tool-btn clear" id="clearCanvas">🗑️ Xóa tất cả</button>
+      <button class="tool-btn save" id="saveCanvas">💾 Lưu</button>
+    </div>
+
+    <div class="color-picker">
+      <label for="colorPicker">Màu sắc:</label>
+      <input type="color" id="colorPicker" value="#000000">
+    </div>
+
+    <div class="brush-size">
+      <label for="brushSize">Độ dày:</label>
+      <input type="range" id="brushSize" min="1" max="20" value="3">
+      <span id="brushSizeValue">3px</span>
     </div>
 
     <div class="canvas-wrapper">
       <canvas id="drawingCanvas" width="600" height="400"></canvas>
       <div class="canvas-info">
-        Sử dụng chuột để vẽ. Nhấn "Xóa tất cả" để xóa bảng.
+        💡 Sử dụng chuột hoặc ngón tay để vẽ. Nhấn "Xóa tất cả" để xóa bảng.
       </div>
+    </div>
+
+    <div class="mobile-tips">
+      <h4>📱 Mẹo sử dụng trên mobile:</h4>
+      <ul>
+        <li>Dùng ngón tay để vẽ trên màn hình</li>
+        <li>Chọn màu sắc và độ dày bút vẽ ở trên</li>
+        <li>Dùng tẩy để xóa từng phần</li>
+        <li>Nhấn "Lưu" để tải về máy</li>
+      </ul>
     </div>
   </div>
 
@@ -160,10 +296,13 @@
         this.ctx = this.canvas.getContext('2d');
         this.isDrawing = false;
         this.currentTool = 'pen';
+        this.currentColor = '#000000';
+        this.brushSize = 3;
         
         this.initCanvas();
         this.initEventListeners();
         this.initTools();
+        this.resizeCanvas();
       }
 
       initCanvas() {
@@ -171,18 +310,41 @@
         this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
         this.ctx.lineCap = 'round';
         this.ctx.lineJoin = 'round';
-        this.ctx.lineWidth = 3;
+        this.ctx.lineWidth = this.brushSize;
+        this.ctx.strokeStyle = this.currentColor;
+      }
+
+      resizeCanvas() {
+        const container = this.canvas.parentElement;
+        const containerWidth = container.clientWidth - 40; // Padding
+        
+        if (window.innerWidth <= 768) {
+          // Mobile: full width, fixed height
+          this.canvas.width = containerWidth;
+          this.canvas.height = 350;
+        } else {
+          // Desktop: maintain aspect ratio
+          this.canvas.width = Math.min(600, containerWidth);
+          this.canvas.height = 400;
+        }
+        
+        this.initCanvas();
       }
 
       initEventListeners() {
+        // Mouse events
         this.canvas.addEventListener('mousedown', this.startDrawing.bind(this));
         this.canvas.addEventListener('mousemove', this.draw.bind(this));
         this.canvas.addEventListener('mouseup', this.stopDrawing.bind(this));
         this.canvas.addEventListener('mouseout', this.stopDrawing.bind(this));
 
-        this.canvas.addEventListener('touchstart', this.handleTouch.bind(this));
-        this.canvas.addEventListener('touchmove', this.handleTouch.bind(this));
+        // Touch events
+        this.canvas.addEventListener('touchstart', this.handleTouch.bind(this), { passive: false });
+        this.canvas.addEventListener('touchmove', this.handleTouch.bind(this), { passive: false });
         this.canvas.addEventListener('touchend', this.stopDrawing.bind(this));
+
+        // Window resize
+        window.addEventListener('resize', this.resizeCanvas.bind(this));
       }
 
       initTools() {
@@ -190,6 +352,21 @@
         document.getElementById('eraserTool').addEventListener('click', () => this.setTool('eraser'));
         document.getElementById('clearCanvas').addEventListener('click', () => this.clearCanvas());
         document.getElementById('saveCanvas').addEventListener('click', () => this.saveCanvas());
+        
+        // Color picker
+        document.getElementById('colorPicker').addEventListener('change', (e) => {
+          this.currentColor = e.target.value;
+          if (this.currentTool === 'pen') {
+            this.ctx.strokeStyle = this.currentColor;
+          }
+        });
+
+        // Brush size
+        document.getElementById('brushSize').addEventListener('input', (e) => {
+          this.brushSize = parseInt(e.target.value);
+          this.ctx.lineWidth = this.brushSize;
+          document.getElementById('brushSizeValue').textContent = this.brushSize + 'px';
+        });
       }
 
       setTool(tool) {
@@ -198,51 +375,72 @@
         document.querySelectorAll('.tool-btn').forEach(btn => btn.classList.remove('active'));
         if (tool === 'pen') {
           document.getElementById('penTool').classList.add('active');
+          this.ctx.strokeStyle = this.currentColor;
+          this.ctx.globalCompositeOperation = 'source-over';
         } else if (tool === 'eraser') {
           document.getElementById('eraserTool').classList.add('active');
+          this.ctx.strokeStyle = 'white';
+          this.ctx.globalCompositeOperation = 'destination-out';
         }
+      }
+
+      getMousePos(e) {
+        const rect = this.canvas.getBoundingClientRect();
+        const scaleX = this.canvas.width / rect.width;
+        const scaleY = this.canvas.height / rect.height;
+        
+        return {
+          x: (e.clientX - rect.left) * scaleX,
+          y: (e.clientY - rect.top) * scaleY
+        };
+      }
+
+      getTouchPos(e) {
+        const rect = this.canvas.getBoundingClientRect();
+        const scaleX = this.canvas.width / rect.width;
+        const scaleY = this.canvas.height / rect.height;
+        const touch = e.touches[0];
+        
+        return {
+          x: (touch.clientX - rect.left) * scaleX,
+          y: (touch.clientY - rect.top) * scaleY
+        };
       }
 
       startDrawing(e) {
         this.isDrawing = true;
-        this.draw(e);
+        const pos = this.getMousePos(e);
+        this.ctx.beginPath();
+        this.ctx.moveTo(pos.x, pos.y);
       }
 
       draw(e) {
         if (!this.isDrawing) return;
 
-        const rect = this.canvas.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-
-        if (this.currentTool === 'pen') {
-          this.ctx.strokeStyle = '#000000';
-          this.ctx.globalCompositeOperation = 'source-over';
-        } else if (this.currentTool === 'eraser') {
-          this.ctx.strokeStyle = 'white';
-          this.ctx.globalCompositeOperation = 'destination-out';
-        }
-
-        this.ctx.lineTo(x, y);
+        const pos = this.getMousePos(e);
+        this.ctx.lineTo(pos.x, pos.y);
         this.ctx.stroke();
-        this.ctx.beginPath();
-        this.ctx.moveTo(x, y);
       }
 
       stopDrawing() {
         this.isDrawing = false;
-        this.ctx.beginPath();
       }
 
       handleTouch(e) {
         e.preventDefault();
-        const touch = e.touches[0];
-        const mouseEvent = new MouseEvent(e.type === 'touchstart' ? 'mousedown' : 
-                                        e.type === 'touchmove' ? 'mousemove' : 'mouseup', {
-          clientX: touch.clientX,
-          clientY: touch.clientY
-        });
-        this.canvas.dispatchEvent(mouseEvent);
+        
+        if (e.type === 'touchstart') {
+          const pos = this.getTouchPos(e);
+          this.isDrawing = true;
+          this.ctx.beginPath();
+          this.ctx.moveTo(pos.x, pos.y);
+        } else if (e.type === 'touchmove' && this.isDrawing) {
+          const pos = this.getTouchPos(e);
+          this.ctx.lineTo(pos.x, pos.y);
+          this.ctx.stroke();
+        } else if (e.type === 'touchend') {
+          this.isDrawing = false;
+        }
       }
 
       clearCanvas() {
@@ -253,10 +451,14 @@
       }
 
       saveCanvas() {
-        const link = document.createElement('a');
-        link.download = 'canvas-drawing.png';
-        link.href = this.canvas.toDataURL();
-        link.click();
+        try {
+          const link = document.createElement('a');
+          link.download = 'canvas-drawing-' + new Date().getTime() + '.png';
+          link.href = this.canvas.toDataURL();
+          link.click();
+        } catch (error) {
+          alert('Không thể lưu ảnh. Vui lòng thử lại.');
+        }
       }
     }
 

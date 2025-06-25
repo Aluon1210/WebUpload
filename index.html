@@ -518,16 +518,46 @@
         display: none;
         flex-direction: column;
         width: 100%;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background: #215c5c;
+        padding: 20px;
       }
 
       .nav-links.open {
         display: flex;
       }
 
+      .nav-links li {
+        width: 100%;
+        margin-bottom: 10px;
+      }
+
+      .nav-links li a {
+        width: 100%;
+        padding: 12px;
+        border-radius: 6px;
+      }
+
+      .has-submenu {
+        width: 100%;
+      }
+
+      .has-submenu > a {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
       .submenu {
         position: static;
-        background: transparent;
-        padding-left: 20px;
+        background: #1a4b4b;
+        padding: 10px 0;
+        margin-top: 10px;
+        border-radius: 6px;
+        display: none;
+        width: 100%;
       }
 
       .has-submenu:hover .submenu {
@@ -536,6 +566,15 @@
 
       .has-submenu.open .submenu {
         display: block;
+      }
+
+      .submenu li {
+        margin-bottom: 0;
+      }
+
+      .submenu li a {
+        padding: 10px 20px;
+        border-radius: 0;
       }
 
       /* Hide desktop, show mobile */
@@ -816,6 +855,10 @@
       // Toggle menu trên mobile
       menuToggle.onclick = () => {
         navLinks.classList.toggle('open');
+        // Đóng submenu khi đóng menu chính
+        if (!navLinks.classList.contains('open')) {
+          submenuBtn.classList.remove('open');
+        }
       };
 
       // Xử lý mở/đóng submenu trên mobile
@@ -825,10 +868,13 @@
         submenuBtn.classList.toggle('open');
       };
 
-      // Dọn sạch các trạng thái open của submenu khi click ra ngoài
-      document.body.onclick = () => {
-        submenuBtn.classList.remove('open');
-      };
+      // Đóng menu khi click ra ngoài
+      document.addEventListener('click', (e) => {
+        if (!navLinks.contains(e.target) && !menuToggle.contains(e.target)) {
+          navLinks.classList.remove('open');
+          submenuBtn.classList.remove('open');
+        }
+      });
 
       // Xử lý click vào các liên kết menu
       const navLinksItems = document.querySelectorAll('.nav-links li a');
@@ -853,6 +899,10 @@
             if (targetArticle) {
               targetArticle.classList.add('active');
             }
+            
+            // Đóng menu trên mobile
+            navLinks.classList.remove('open');
+            submenuBtn.classList.remove('open');
           }
         };
       });
@@ -862,31 +912,41 @@
         link.onclick = (e) => {
           e.preventDefault();
 
-          // Ẩn tất cả các article
-          hideAllArticles();
-
           const href = link.getAttribute('href');
+          
+          // Kiểm tra nếu đang ở mobile
+          const isMobile = window.innerWidth <= 768;
+          
+          if (isMobile) {
+            // Trên mobile: chuyển hướng trực tiếp đến trang
+            window.location.href = href;
+          } else {
+            // Trên desktop: load vào iframe
+            // Ẩn tất cả các article
+            hideAllArticles();
 
-          // Cập nhật iframe nội dung mới
-          const iframe = document.querySelector('#blog iframe');
-          iframe.setAttribute('src', href);
-
-          // Hiển thị article của blog
-          document.querySelector('#blog').classList.add('active');
-
-          // Ẩn các article khác
-          document.querySelectorAll('article').forEach(article => {
-            if (article.id !== 'blog') {
-              article.classList.remove('active');
+            // Cập nhật iframe nội dung mới
+            const iframe = document.querySelector('#blog iframe');
+            if (iframe) {
+              iframe.setAttribute('src', href);
             }
-          });
 
-          // Đóng menu trên mobile nếu đang mở
-          if (navLinks.classList.contains('open')) {
-            navLinks.classList.remove('open');
+            // Hiển thị article của blog
+            const blogArticle = document.querySelector('#blog');
+            if (blogArticle) {
+              blogArticle.classList.add('active');
+            }
+
+            // Ẩn các article khác
+            document.querySelectorAll('article').forEach(article => {
+              if (article.id !== 'blog') {
+                article.classList.remove('active');
+              }
+            });
           }
 
-          // Đóng submenu
+          // Đóng menu trên mobile
+          navLinks.classList.remove('open');
           submenuBtn.classList.remove('open');
         };
       });
