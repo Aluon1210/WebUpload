@@ -136,6 +136,11 @@
       background: #f7f7f7;
     }
 
+    .mobile-section:first-child {
+      padding: 0;
+      background: transparent;
+    }
+
     .mobile-section:nth-child(even) {
       background: white;
     }
@@ -143,10 +148,9 @@
     /* Mobile Home */
     .profile-section {
       max-width: 700px;
-      margin: 0 auto;
+      margin: 0;
       background: #fff;
-      border-radius: 18px;
-      box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+      border-radius: 0;
       padding: 32px 20px;
       text-align: center;
     }
@@ -417,6 +421,77 @@
       font-size: 0.9rem;
     }
 
+    /* Mobile Blog */
+    .blog-container {
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .blog-header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .blog-header .badge {
+      background: #e3f2fd;
+      color: #1976d2;
+      padding: 5px 12px;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      margin-bottom: 10px;
+      display: inline-block;
+    }
+
+    .blog-header h1 {
+      font-size: 1.5rem;
+      color: #1976d2;
+      margin-bottom: 10px;
+    }
+
+    .blog-header p {
+      color: #444;
+    }
+
+    .blog-content {
+      background: #fff;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      min-height: 400px;
+    }
+
+    .blog-placeholder {
+      text-align: center;
+      color: #666;
+    }
+
+    .blog-placeholder h3 {
+      color: #1976d2;
+      margin-bottom: 15px;
+    }
+
+    .blog-placeholder ul {
+      text-align: left;
+      max-width: 300px;
+      margin: 20px auto;
+      padding-left: 20px;
+    }
+
+    .blog-placeholder li {
+      margin-bottom: 10px;
+      padding: 10px;
+      background: #f5f5f5;
+      border-radius: 8px;
+      border-left: 4px solid #1976d2;
+    }
+
+    .blog-iframe {
+      width: 100%;
+      height: 500px;
+      border: none;
+      border-radius: 8px;
+    }
+
     /* Footer */
     .footer {
       background-color: #f9fafb;
@@ -656,7 +731,7 @@
   <!-- Mobile Content - Direct Sections -->
   <div class="mobile-content">
     <section class="mobile-section" id="mobile-home">
-      <div class="profile-section">
+      <div class="profile-section"  id="profileSection">
         <img src="image/z6063753391188_8203c56b57d8cb571ff043f30219e4a7.jpg" alt="Ảnh đại diện Dương Thành Công" class="profile-avatar" />
         <div class="profile-badge">GIỚI THIỆU BẢN THÂN</div>
         <div class="profile-name">Dương Thành Công</div>
@@ -784,6 +859,28 @@
         </div>
       </div>
     </section>
+
+    <section class="mobile-section" id="mobile-blog" style="display: none;">
+      <div class="blog-container">
+        <div class="blog-header">
+          <span class="badge">Blog</span>
+          <h1>Nội dung Blog</h1>
+          <p>Chọn một mục từ menu Blog để xem nội dung</p>
+        </div>
+        <div class="blog-content" id="mobileBlogContent">
+          <div class="blog-placeholder">
+            <h3>📝 Chọn nội dung từ menu Blog</h3>
+            <p>Các tùy chọn có sẵn:</p>
+            <ul>
+              <li>🎨 Biểu đồ - Bảng vẽ đơn giản</li>
+              <li>📍 Vị Trí - Thông tin địa lý</li>
+              <li>🖱️ Kéo thả - Tương tác drag & drop</li>
+              <li>❓ FAQ - Câu hỏi thường gặp</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
   </div>
 
   <!-- Footer -->
@@ -900,6 +997,18 @@
               targetArticle.classList.add('active');
             }
             
+            // Ẩn tất cả mobile sections
+            document.querySelectorAll('.mobile-section').forEach(section => {
+              section.style.display = 'none';
+            });
+            
+            // Hiển thị mobile section tương ứng
+            const mobileSectionId = href.replace('#', '#mobile-');
+            const mobileSection = document.querySelector(mobileSectionId);
+            if (mobileSection) {
+              mobileSection.style.display = 'block';
+            }
+            
             // Đóng menu trên mobile
             navLinks.classList.remove('open');
             submenuBtn.classList.remove('open');
@@ -913,36 +1022,50 @@
           e.preventDefault();
 
           const href = link.getAttribute('href');
+          const linkText = link.textContent;
           
-          // Kiểm tra nếu đang ở mobile
-          const isMobile = window.innerWidth <= 768;
+          // Ẩn tất cả các article
+          hideAllArticles();
+
+          // Cập nhật iframe nội dung mới
+          const iframe = document.querySelector('#blog iframe');
+          if (iframe) {
+            iframe.setAttribute('src', href);
+          }
+
+          // Hiển thị article của blog
+          const blogArticle = document.querySelector('#blog');
+          if (blogArticle) {
+            blogArticle.classList.add('active');
+          }
+
+          // Ẩn các article khác
+          document.querySelectorAll('article').forEach(article => {
+            if (article.id !== 'blog') {
+              article.classList.remove('active');
+            }
+          });
+
+          // Ẩn tất cả mobile sections
+          document.querySelectorAll('.mobile-section').forEach(section => {
+            section.style.display = 'none';
+          });
+
+          // Hiển thị mobile blog section và load nội dung
+          const mobileBlogSection = document.querySelector('#mobile-blog');
+          const mobileBlogContent = document.querySelector('#mobileBlogContent');
           
-          if (isMobile) {
-            // Trên mobile: chuyển hướng trực tiếp đến trang
-            window.location.href = href;
-          } else {
-            // Trên desktop: load vào iframe
-            // Ẩn tất cả các article
-            hideAllArticles();
-
-            // Cập nhật iframe nội dung mới
-            const iframe = document.querySelector('#blog iframe');
-            if (iframe) {
-              iframe.setAttribute('src', href);
+          if (mobileBlogSection && mobileBlogContent) {
+            mobileBlogSection.style.display = 'block';
+            
+            // Cập nhật header
+            const blogHeader = mobileBlogSection.querySelector('.blog-header h1');
+            if (blogHeader) {
+              blogHeader.textContent = linkText;
             }
-
-            // Hiển thị article của blog
-            const blogArticle = document.querySelector('#blog');
-            if (blogArticle) {
-              blogArticle.classList.add('active');
-            }
-
-            // Ẩn các article khác
-            document.querySelectorAll('article').forEach(article => {
-              if (article.id !== 'blog') {
-                article.classList.remove('active');
-              }
-            });
+            
+            // Tạo iframe cho mobile
+            mobileBlogContent.innerHTML = `<iframe src="${href}" class="blog-iframe"></iframe>`;
           }
 
           // Đóng menu trên mobile
